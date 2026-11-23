@@ -944,13 +944,16 @@ function saveExerciseToPdf() {
   updateSession();
   return true;
 }
-function finishExercise() {
+function finishExercise(endSession = false) {
   if (!canSaveExercise() || !applyProblem() || !canSaveExercise()) return;
   passedCheck = null;
   updateSession();
   if ($('check-dialog').open) $('check-dialog').close();
   if (!exerciseQueue) {update();return;}
   if (!sessionComplete()) {
+    if (exerciseQueue.openEnded && !endSession) {
+      exerciseQueue.items.push({dividend:'',divisor:''});
+    }
     exerciseQueue.index++;
     if (sessionComplete()) exerciseQueue.finishedAt = Date.now();
     storeExercises();
@@ -961,7 +964,7 @@ function finishExercise() {
     openCheckDialog('complete');
   } else {
     loadQueuedExercise(exerciseQueue.items[exerciseQueue.index]);
-    $('work-title').focus({preventScroll:true});
+    $(exerciseQueue.openEnded?'grid-dividend':'work-title').focus({preventScroll:true});
   }
 }
 $('save-work').onclick = () => {
@@ -1658,6 +1661,18 @@ function updateExerciseActions() {
 }
 
 const exerciseDraft = [];
+let startWithoutPlan = false;
+function chooseExerciseMode(openEnded) {
+  startWithoutPlan = openEnded;
+  $('exercise-mode').hidden = true;
+  $('exercise-setup').hidden = false;
+  $('planned-fields').hidden = openEnded;
+  $('planned-fields').disabled = openEnded;
+  $('quick-start-actions').hidden = !openEnded;
+  $('mage-name').focus();
+}
+$('plan-exercises').onclick = () => chooseExerciseMode(false);
+$('start-now').onclick = () => chooseExerciseMode(true);
 function showMathingHome() {
   $('long-division').hidden = true;
   $('mathing-home').hidden = false;
@@ -1668,7 +1683,10 @@ $('open-long-division').onclick = () => {
   const today = new Date();
   today.setMinutes(today.getMinutes()-today.getTimezoneOffset());
   $('exercise-date').value = today.toISOString().slice(0,10);
+  $('exercise-mode').hidden = false;
+  $('exercise-setup').hidden = true;
   $('welcome-dialog').showModal();
+  $('plan-exercises').focus();
 };
 const exerciseCount = $('exercise-count');
 function renderExerciseInputs(count) {
@@ -1736,16 +1754,16 @@ function loadQueuedExercise(entry) {
 $('exercise-setup').onsubmit = event => {
   event.preventDefault();
   const count = Number(exerciseCount.value);
-  if (!count) return;
-  const items = exerciseDraft.slice(0,count).map(({dividend,divisor})=>({
+  if (!startWithoutPlan && !count) return;
+  const items = startWithoutPlan ? [{dividend:'',divisor:''}] : exerciseDraft.slice(0,count).map(({dividend,divisor})=>({
     dividend:dividend.replace(/^0+(?=\d)/,''),
     divisor:divisor.replace(/^0+/,'')
   }));
-  if (items.some(({dividend,divisor})=>!/^\d+$/.test(dividend)||!/^[1-9]\d*$/.test(divisor))) return;
+  if (!startWithoutPlan && items.some(({dividend,divisor})=>!/^\d+$/.test(dividend)||!/^[1-9]\d*$/.test(divisor))) return;
   const mageName = $('mage-name').value.trim();
   const date = $('exercise-date').value;
   if (!mageName || !date) return;
-  exerciseQueue = {items,index:0,mageName,date};
+  exerciseQueue = {items,index:0,mageName,date,openEnded:startWithoutPlan};
   storeExercises();
   savedWork = [];
   sessionStarted = Date.now();
@@ -1760,7 +1778,7 @@ $('exercise-setup').onsubmit = event => {
   $('long-division').hidden = false;
   loadQueuedExercise(items[0]);
   $('welcome-dialog').close();
-  $('work-title').focus({preventScroll:true});
+  $(startWithoutPlan?'grid-dividend':'work-title').focus({preventScroll:true});
 };
 
 function checkAnswer() {
@@ -1820,7 +1838,8 @@ function openCheckDialog(outcome,detail = '') {
   const correct = outcome==='correct';
   const complete = outcome==='complete';
   const next = outcome==='next';
-  const last = next && (!exerciseQueue || exerciseQueue.index+1>=exerciseQueue.items.length);
+  const canAdd = next && exerciseQueue?.openEnded && !sessionComplete();
+  const last = next && !canAdd && (!exerciseQueue || exerciseQueue.index+1>=exerciseQueue.items.length);
   $('check-title').textContent = correct ? successMessages[successMessageIndex] : next ? (last?'Ready to finish?':'Ready for the next one?') :
     complete ? 'Brave warrior, you made it through!' : 'Oopsie-doodle, try again!';
   if (correct) successMessageIndex = (successMessageIndex+1)%successMessages.length;
@@ -1831,7 +1850,8 @@ function openCheckDialog(outcome,detail = '') {
   $('check-copy').hidden = next && !detail;
   $('check-ok').hidden = next;
   $('check-save').hidden = !next;
-  $('check-next-label').textContent = last ? 'Finish' : 'Onward!';
+  $('check-next-label').textContent = canAdd ? 'Add next exercise' : last ? 'Finish' : 'Onward!';
+  $('finish-open-session').hidden = !canAdd;
   $('check-pdf-save').hidden = !correct;
   $('check-ok').textContent = complete ? 'Close' : 'OK';
   $('check-download').hidden = !(last || complete) || !savedWork.length;
@@ -1880,7 +1900,8 @@ $('check-dialog').addEventListener('cancel',event=>{
   event.preventDefault();
   dismissCheckDialog();
 });
-$('check-save').onclick = finishExercise;
+$('check-save').onclick = () => finishExercise();
+$('finish-open-session').onclick = () => finishExercise(true);
 $('check-pdf-save').onclick = () => {
   if (saveExerciseToPdf()) dismissCheckDialog('Saved to your session PDF.');
 };

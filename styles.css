@@ -286,6 +286,7 @@ button:disabled{opacity:.55;cursor:default}
 .session-fields{display:grid;gap:.65rem;margin-bottom:1rem}
 .session-fields label{display:grid;gap:.25rem}
 .session-fields input{min-width:0;padding:.4rem .55rem}
+#planned-fields{border:0;margin:0;padding:0;min-inline-size:0}
 .exercise-count select{justify-self:start}
 .exercise-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.6rem;margin:.75rem 0;padding:.65rem;border:1px solid var(--divider);border-radius:.45rem}
 .exercise-term-hint{display:block;color:var(--muted);font-size:.9em;margin:.15rem 0 .35rem}

@@ -159,11 +159,19 @@
 <h2 id="welcome-title">Mathing time, let your numbers climb!</h2>
 <button id="close-exercise-setup" type="button">Close</button>
 </div>
-<form id="exercise-setup">
+<div id="exercise-mode" class="dialog-actions">
+<button id="plan-exercises" type="button">Plan Exercises</button>
+<button id="start-now" type="button">Start Now</button>
+</div>
+<form id="exercise-setup" hidden>
 <div class="session-fields">
 <label>Name<input id="mage-name" type="text" required autofocus></label>
-<label>Date<input id="exercise-date" type="date" required></label>
 </div>
+<div id="quick-start-actions" class="dialog-actions" hidden>
+<button type="submit">Start Exercise 1</button>
+</div>
+<fieldset id="planned-fields" aria-label="Exercises to enter ahead of time">
+<div class="session-fields"><label>Date<input id="exercise-date" type="date" required></label></div>
 <label class="exercise-count">How many exercises are you doing today?
 <select id="exercise-count" required>
 <option value="">Choose a number</option>
@@ -185,6 +193,7 @@
 <button id="exercise-add" type="button">Add another exercise</button>
 <button type="submit">Start exercises</button>
 </div>
+</fieldset>
 </form>
 </dialog>
 <dialog id="check-dialog" class="math-dialog" aria-labelledby="check-title" aria-describedby="check-copy">
@@ -195,6 +204,7 @@
 <button id="check-ok" type="button">OK</button>
 <button id="check-save" type="button" hidden><span class="session-icon" aria-hidden="true" style="--session-icon:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB9ElEQVR4nO2Yu0oDQRSGP6/x3gkRu4B2BnwNsdBCjW+h4AvYKAQrES+JCiIIKggKgoUINirBQvANIhaJpRFMLFYWTrEsKzizsxPB+eAUWXZm/n9yZs7MgsPhcDgcZhgA5oEiUAKqQEOiKs8KQA7o5w8xCuwBH4D3y/Df3QVGmim8G1gDvhSEh6MB5IEu2+L9mXuOITwc98CQLfHjktOe4XgBsjZmPgnxXsBEOinxfp4+JSjek3iU9WWcNQviPYnlJLbKOLuNarybTqU9hcFrwBIwBVzHMLFpssKqFKnFQNt24EjTQA3oM2FgXnHgyVD7NuBA08ScCQNFxUGvRHSQVjk6qBrYMWGgpDHwCdAR6qcFWNeo0LF50/z7z4DOCBM7Cn1U4suHuqYBPy6AVKi/HoU+P5tt4DzCQK9tA2+a4k9/WAdF2ylU0hB/LDUgLH6jGYu4oDjoZcQ26v/e15iIbRMGcoqDTkSIP9RMwxkTBvoVjxILgbYdkk5NPUqgWEXf5TA3DdxoivckdY3exBoxxKhGHchgmLxFA6skdKW8tyD+LqL4GcO/JZUTFP8KDJMwWfl6YFp8GRjDEoPAreG0SWOZlHw9qMXcbVaSzPnfkJYLuIqRmtwLMvwh+uQO659fHuQkWZeoyLMtYNZkhXU4HA7H/+Yb28Xd7OtMA+oAAAAASUVORK5CYII=')"></span><span id="check-next-label">Onward!</span></button>
 <button id="check-pdf-save" type="button" hidden>Save to PDF</button>
+<button id="finish-open-session" type="button" hidden>Finish session</button>
 <button id="check-download" type="button" hidden>Download PDF</button>
 </div>
 </dialog>

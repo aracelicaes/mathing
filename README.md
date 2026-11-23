@@ -2,6 +2,8 @@
 
 Mathing is a browser-based long division practice app. It includes a keyboard-friendly division grid, carry rows, a Scratch Pad, answer feedback, and optional PDF exports.
 
+Choose **Plan Exercises** to plan a set, or choose **Start Now** to enter just a name. With Start Now, type the numbers for each exercise in the grid and choose **Add next exercise** after checking it.
+
 ## Open it on your computer
 
 Keep these files together and open `index.html` in your browser. Mathing runs offline and needs no installation.
