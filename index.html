@@ -13,14 +13,10 @@
 </main>
 <main id="long-division">
 <header class="app-header">
-<span class="app-name">Mathing</span>
-<div class="display-options">
-<label>Cell size <select id="size"><option value="3.65rem">Small</option><option value="4.5rem">Medium</option><option value="5.5rem">Large</option></select></label>
-<label>Theme <select id="theme"><option value="dark">Dark</option><option value="light">Light</option></select></label>
-<label>Highlight <select id="highlight"><option value="yellow">Yellow</option><option value="green">Green</option><option value="pink">Pink</option><option value="blue">Blue</option></select></label>
-</div>
-<h1>Long Division</h1>
+<h1 class="app-title"><span class="app-name">Mathing</span><span aria-hidden="true">&gt;</span><span>Long Division</span></h1>
+<div class="header-toolbar">
 <div class="tools">
+<button id="mobile-menu-toggle" type="button" hidden aria-controls="mobile-cards" aria-expanded="false"><span class="mobile-menu-icon" aria-hidden="true"></span>Menu</button>
 <button id="undo" type="button" class="history-button" aria-label="Undo" title="Undo"><img alt="" width="26" height="26" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAADcElEQVR4nO2cT2teVRCHR2kVKm4ULC3WlQhK9xr6CZRiRbuVunIhLtSNCAZa0S+g+G8pxU9QSje2teu6TVPoW9yVQoI0vrnzm5m0mXLzRo2trb23zT1zT+aBs8hu8jDMmTP3nJcoSZIkSZIkSZIk+QdAj2/5M9kuyRDz0nHsCMlI0cNIRooeRjJS9DCSkaKHkYwUPYxkpOhhJCNFDyMZKXoYyUjRw0hGih5GMrZpMVQB/YPFJix6jkV/AOxDVT3o7o/RmIkiGf+79DqL/chsh0YnfTyS7Y7Mt0VA33P33RSdsUrGVuFivzci71BUapCMfwnXM8z8AkWiNsn4Szb0RiNylKJQq2jMZK+z2DxFoWbZmJWSb9z9cYoAi31auezvKAr1Z7Z9TlGoObMZui4iRygKdWe2LjPzAYpChKGSu++eTv25prFXG7GPNuYd0LVHkNmnKRIRx6Q33J8B9ARDpw8juxF5myIRdfA/nfpeiP3UO6vFrrr7LorEg2yQVAjA3meo9ZLNeoyiEfnjrMja4T61m2GXQo5Y75fZVJh2s+yX1TZHEYl8gQZiJ7vXav2eosL/kdkUgLYVZOif3WTr9ZDl416yKQiAftE1q0XkFYoMAl7bXVnxZztvjLAPKDq8mdkUCBY937FOf0tjAMGeVjRiH3cUfbZ0zKOE2ea6ibarpWMeJdPZ8bxL57FUOuZR4u5PdspoqJSOeZR4ih6GLB0DkZvhQLDYJ9neDQBEL1R5YIlEtUfwaAD6VY+h0sul4x4Vq6u+j6GrHTuOa6HHpBEB7OdRXxWrsdPA5moae6107KNBRN5k6M3O2QxbKB37aMDsukGv20vM+m7p+MPTNM3+PjV5y2lwEu4CTbQ+GdAvu3cXd9RmkbdK/y9hcPcn2gFRO7uYbXb6a59afHdt1lNUK+7+1IYs2G8MXXlYWf2XLjVN8zzViIi81F6/Kif370xeF1l7nWrE3Z9m2OXSkjc3wM+oVlhsPobkyid0LDYJIPnrMM/ftuvbHUNvlazJVZeLGKJ1WWTtDdopsNiVApl8qtoW7l60jyiHq8U2CfWOsEB7t7i9GWwL7YBox88uALzYynjENfhaO7QP+zSiFO6+Z+OdCfRi+1saD1hrdeOlq9gVFv2lFdt+SA1/cTxJkiRJkiRJkiRJkiRJkoSq5zZFeH/NW6LH1gAAAABJRU5ErkJggg=="></button>
 <button id="redo" type="button" class="history-button" aria-label="Redo" title="Redo"><img alt="" width="26" height="26" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAADZ0lEQVR4nO2bu4+MURTAL/FIiALxaFBQCTXBXyBLQaIVSvGsFDZZVDoS8WyE/0Eo2O1FJ3YlBB0SZHdn57wGR+7OTjwTc2fMfe35JV9/vt93cu49597POcMwDMMwDMMwDCMPEPlS6hjmBUiiJjuWaJMdUbTJjijaZEcUbbIjijbZEUWb7IiiTXZE0SY7omiTHVF0TbJVdQEzb0eUE0B8E4hHgeQVIn8GZA6SMqgH+bwrVS6A7AGS20j8IbnI2mSr6mJEPgIoL5KLq1U2MB9CkrfJZdUqGwA2AfHD5IJqlk1E+xH5U3IxNBDZeexG/FcH5G/JhVClWa2qC4H4WnIRVLFkDyBfSS6CBvcAyUgW5SK1CKw9k4laQzXXZMghk/0WzrfMqWVgzZns+R/7ZEBuAfFjIjnVbMqORkPX+k5yEPGWKbnd8fUjuOFfZlJ1ZayYi5M8O7voo60Gkjs+c2PHXZRkDyIf7TGLvwDJ2WRxl7Dw/TLq7GEKB8gtotbelLEXk8keP0/ubQWX46ljLyKTO7SH9uE12WVAEZncKRtI/D50d9Fo6DqXAUVksmf2jC88m0dcJuQa1x/4OhuYzRJzn/wvsi4XP+NPq8OymR+5jMg+kzsA8ViIaN9Wu4zIPpM7AMmbENF+duGMcJD4Y4jo6WldkzrmIgm9QaSqS1LHXCQmOhJWOiIBJK9tMYyAv/EZJJrkdIy4qqOHhmU0dcxF0kML3ppUXZU67uJg5m0homcf5Aup4y6OuTHpu8CsnpmZ0fWpYy8OILkVnNUkd1PHXRwAsrsH0UokJ1PHXhRzh7MTPR7ODqWOvyj8/yglXjcoDn+BJnRkir8+92yB7JIm0cE+RKvfjSDyxakpXZ36XbIHiB/0Ixt/XHIca5KcaTZlpz8xt6nfbwDAxpQ/BQHyJKI89R9JVZe7miGifTlcRAeU54i4xdUMkAynFo1t2ROqusLVDCJfzkI2ybCrmbnf365mIPqlmw/4jEpZswH5q6oudfMB32qHni+iie4NANgAyPetdESiSXQg9FC3T9Hn3HxFVRcB8GFAGR9s2ZDx6rd33QIgu4D4RuhJTReSnyHi5tTvlyVEtBVRjgHxdf9Tp6+vfhHt9kZUuwXnJ/7WqqouS/0+hmEYhmEYhmEYhmEYhmEYhvsb3wFtToPghPWXagAAAABJRU5ErkJggg=="></button>
 </div>
@@ -28,11 +24,44 @@
 <button id="check-math" type="button"><span class="session-icon" aria-hidden="true" style="--session-icon:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB1ElEQVR4nO2XvStGURzHP4iUKJNMlJKXZ1MmIYOkTCYlUrIYrBb+BxHZHgtSxEQZTFhlMRhIEgaE8hT16Na5dbrudd+ee+65dT51huc+v3P6fM/Lc+4DBoPBYHCnChgApoFeoIIM0QFcA0WpXQBNZIAc8CSkr4A14EZ8vgWayYj8IVAtntcBp7qHyHnI29RKIawVqSdD8nKIc1G3iiZ0BpS3aRW1d2RQ3qJB+mXKnHw5sK1DgKjyG5L883/Fo8AxcA+cAJOayReBfa/iBUeh3ZaAMk3k38VYf1gUBT/AHNAITAFf4vlyjBClkv8AevzkxxzfDcUMkbj8iCQ/7jHgoBRiPUSINuBB9DsKIZ93yH8C/V4d7Ct61mfgsCthzfxjkjNvUxCFNfgTNIQyeaTiYYLhF0KpvMW36PACdBEvhHJ5i0up4yvQTTCcB7tdxYF1Y94xQNSVKESY+Xycmbex/jDvliiEcnmbypgh+sRrSCry8kpsOQYOcyZQtefTCpG4fJIhlMknEUK5fClDpCYvh9iMGCJ1+TghtJGPEkI7+TAhtJX3u7EnRJC9JG5YFSvh1rSa+bAhtJaXt9OOi/ybjtvGC+vQzgAHwBmwArR4VhsMBgMSvyJFU+I1T/wkAAAAAElFTkSuQmCC')"></span><span>Check Math</span></button>
 <button id="save-work" type="button"><span class="session-icon" aria-hidden="true" style="--session-icon:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABY0lEQVR4nO3ZvUoDQRSG4RfsU6RRUBJIIVobGztvQRAsrL2J3EBA3N7WPleQzk6wiE2qgIo2FipaqKgwsjiBRXD/Zs7OiOeDr9kic56dQMgMaDSiWQF6DXfRx+CbwAwwAfoB7LkMvwBc5SyQwsZCndk1Pl0QqwVvaIBcBpl1aiM2IgEYi9iPCdACdjPdKgDU2glJwPqPzxqVAFTeiRgBpgoiVoApi4gZYIB3oP2XAQboKuC/Alo1fgeMb8AQuQybANwAHYHhO8BtE4C0r8AEOPfUCfBWcngvgNDtKgAFoADXHXgCHjz3uYmv0D3QRy7bwIsk4Aj5nEgCJP/Uz5MoAAU4JVEACnBKogAU4JREAXz3zB5/HAcEHNoZpnUA84Ong4CAHfvstCwge8V0Z++upgEBF3aGx8yzdtEl32WgS76x7XXO+ukxTGH6Aa9ZTU7T3VirspXLAS66e790qcrgGg3l8gXDsHbzCPzI3wAAAABJRU5ErkJggg==')"></span><span>Done and Save</span></button>
 </div>
+</div>
+<div class="display-options">
+<label>Theme <select id="theme"><option value="dark">Dark</option><option value="light">Light</option></select></label>
+<label>Highlight <select id="highlight"><option value="yellow">Yellow</option><option value="green">Green</option><option value="pink">Pink</option><option value="blue">Blue</option></select></label>
+</div>
 </header>
 <p id="status" class="sr" role="status"></p>
+<div id="mobile-cards" class="mobile-cards" hidden></div>
 <div class="layout">
-<div class="left-rail">
-<aside class="card guide" aria-labelledby="data-title">
+<div class="left-rail" id="left-rail">
+<section class="card grid-settings" id="grid-settings-card" aria-labelledby="grid-settings-title">
+<div class="card-heading">
+<h2 id="grid-settings-title">Grid Settings</h2>
+<button type="button" class="term-toggle" id="grid-settings-toggle" aria-controls="grid-settings-details" aria-expanded="true" aria-label="Hide Grid Settings"><span class="term-eye" aria-hidden="true"></span></button>
+</div>
+<div id="grid-settings-details">
+<div class="grid-size">
+<span id="grid-size-label">Size</span>
+<div class="scratch-zoom" role="group" aria-labelledby="grid-size-label">
+<button type="button" id="grid-size-small" aria-label="Small" aria-pressed="true">S</button>
+<button type="button" id="grid-size-medium" aria-label="Medium" aria-pressed="false">M</button>
+<button type="button" id="grid-size-large" aria-label="Large" aria-pressed="false">L</button>
+</div>
+</div>
+<h3 id="carry-rows-title">Carry Rows</h3>
+<div class="grid-settings-actions" role="group" aria-labelledby="carry-rows-title">
+<button id="add-carry-row" type="button"><span class="session-icon" aria-hidden="true" style="--session-icon:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABlUlEQVR4nO2YzUoDMRDHf2cVfQAvIlbPoidbK1j11CI+kYdS8AUEqz5Lvx6ievcotmKL4CkSGGHdXXe3H26yMD8YKDRh5p9MJpMFRVEURVEUJcgl0AOmgPHEpkAXaJDCjQfBmhRrJa28KYjV4wT0PAjMZLROnICJB4GZjPYRJ8AUzCK4DsioAIplEVwHZIou4A14kPuoBKwCK8AWcAXcAu8+CvgEmsA66dgx18CXLwJegINADBeyC8/S/1h7Au6B88C4fR8E2OA3xfceMMgwpw/s/rU9eafNofg9AcYzzB0BVdcCmoGVH88xfyQH3UkvZKvNhvgcJIw7AsoJ/9v3wS+6OQl4FH/2UCaNy5IZtaCARk4CbE1Hqo1ZUEA7vAutHATsiC9bKhcVYEtshLo8GP7rTKyJH9vTh3M+jXKWd0FehAVUMsw59knAMlJo6DD+pRziO4fxc7YEAac4pp8QXCUm51O/TOTNNvA6523+U46dU5XeZpbg7c54RSljK9PxaeXjqEl7MJSLdCK/2z4cWEVRFCJ8A121vQAHgYUPAAAAAElFTkSuQmCC')"></span><span>Add Row</span></button>
+<button id="delete-carry-row" type="button"><span class="session-icon" aria-hidden="true" style="--session-icon:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB2ElEQVR4nO2ZzStEURiHHzbYGMVCVmq2rCwIG8VukphZjmJhK3b27PwD8pGsbSWxVnRtxkpISiQWsiCiq6NDp9u5zFxnzrnqPPWuZu77vr+Z8/E754LH4/F4PB6P54saIAt0pTSyskctPcA5EKY8zoDuaPNNwE0KmgvLjGsgowoYTkFTYYWRUwVMKR8EpJdA6VP0/I0XYInAC3BM4AU4JvjvAg7/u4B2YDOtArLAEDAOjAF9QGPMdyeBYhoENAPzwEmMXXgBdoCCxoXWuBYwDTxU4H0OgM64ZDYF1AEbCQ3cozSeTgWs/NGFvgIDrgRMG7LSd0CbbQEtFY758JdYVpPnDCb+inegVamxYDj/m9wXPsnIY5rJAkeRfyBuqQz/EDNqAXFQPjWYXExWdZMKqxC7urFq6lpFnWSDmuK3QL7MXOLHXdTkELcoVihqis8lyHMRyfGEJfIaAWsJVrHHSI57LNEbM4b3gKUyYhW41DxfsiWgURoz05N4HYvsVEHAiE0BBcPNXwENNgUI/75vUMAEDujQrCRhgtgCanHEsLTESZsvRW+mXdAvd+KwwtiWrwJSgbAawhILV1nOhBUHeWfD5ieEJZ6Vxkx4m2e5wx7LdX4UqI97+gOtgHps2v8wNQAAAABJRU5ErkJggg==')"></span><span>Delete Row</span></button>
+<button id="carry-grid-toggle" type="button" aria-controls="work-grid" aria-expanded="false"><span class="session-icon" aria-hidden="true"></span><span id="carry-grid-label">Show Rows</span></button>
+</div>
+<h3 id="grid-color-title">Grid Color</h3>
+<div class="grid-settings-actions" role="group" aria-labelledby="grid-color-title">
+<button id="color-code-toggle" class="color-code-toggle" type="button" aria-pressed="true" aria-label="Color Code"><span class="session-icon" aria-hidden="true" style="--session-icon:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACQklEQVR4nO2aTUhUURTHf0YZZohJlFmIJtJCIVtJCSEIgknhSkRoFm0k3RRECzfiohatS9GIQFqVi0SJwEWBtQjKj4WIhgsRFAkSo/Ija+TCEYYhc+6dy3k38Q+H4TFv4Hfu1/uf8wb2ta89pQLgbApxmADVCcRTjDkgg4BUBWxaJDBGQMoGZizgTdQTkB5bwr8jIF21hDdRTSA6Dixawg8SkF5Ywv8GKghENxyWzjMCURGwYgm/AZQQgA4AbxxG/yGB6K4D/E/gNAGoDFh1SOAeAciYrwkH+GUgjwD0wAE+LkvuvzNqcYkF4EjU8EeBz46j30IAeuoIPwMcihr+nCN8HGiKEvyEfF50hB+VB56qzHTfBD4AP+Q6x/Hcr9OGrwSmkiCuyHePLOHfasNfkxFPBhmRotvMwrRFApc04S+IT9kJ5pbcdwqYTAF+QNsa7FaIm4dXLKH6er5LsVKumcCdFJeEAWtL+F0D8Okv9/Vpj/6S5eYcAgqTNn67gPcC+ZoJXHc837+JqSslYr1yTGA7/sgpdR9oBU5qwucC62kmkBzFmgnEPMNvapu2l54TmNT29i7e5l/Rq5lAk2d4E6q2ud8z/Hdpravo2A6mLZ3oQlG3PcObvXRGCz4LmPecgGq7pMMz/JBmyVgF/PIIPywzqqIK4ItH+B4gUwu+WfqSPsA/Ape1wGuA1x6g18R21Gq9kM4Qi5uOKTPd526gUYp5VR0ExgXGFOpfJcxbxFnpLLyXwvuJ9OzNs8HAno/yvwtbDtrGz86PNkwAAAAASUVORK5CYII=')"></span><span class="color-code-label">Color Code</span></button>
+</div>
+</div>
+</section>
+
+<aside class="card guide" id="data-card" aria-labelledby="data-title">
 <div class="card-heading">
 <h2 id="data-title">Data Box</h2>
 <button type="button" class="term-toggle" id="data-toggle" aria-controls="data-fields" aria-expanded="true" aria-label="Hide Data Box"><span class="term-eye" aria-hidden="true"></span></button>
@@ -104,36 +133,23 @@
 
 </section>
 </div>
-<div class="reference-column">
-<aside class="card step-reference" aria-labelledby="reference-title">
-<div class="step-heading">
+<div class="reference-column" id="reference-column">
+<aside class="card step-reference" id="hmsb-card" aria-labelledby="reference-title">
+<div class="card-heading">
 <h2 id="reference-title">HMSB Steps</h2>
+<button type="button" class="term-toggle" id="hmsb-toggle" aria-controls="hmsb-details" aria-expanded="true" aria-label="Hide HMSB Steps"><span class="term-eye" aria-hidden="true"></span></button>
+</div>
+<div id="hmsb-details">
 <button id="step-lock" class="step-lock" type="button" aria-label="Require a step before editing" aria-pressed="true" title="Turn step lock off"><span class="step-lock-icon" aria-hidden="true"></span></button>
 </div>
 <div class="steps" role="group" aria-label="Select a division step" id="steps"></div>
 <p id="step-message" class="problem-message" role="status"></p>
+</div>
 </aside>
-<section class="card grid-settings" aria-labelledby="grid-settings-title">
-<div class="card-heading">
-<h2 id="grid-settings-title">Grid Settings</h2>
-<button type="button" class="term-toggle" id="grid-settings-toggle" aria-controls="grid-settings-details" aria-expanded="true" aria-label="Hide Grid Settings"><span class="term-eye" aria-hidden="true"></span></button>
-</div>
-<div id="grid-settings-details">
-<h3 id="carry-rows-title">Carry Rows</h3>
-<div class="grid-settings-actions" role="group" aria-labelledby="carry-rows-title">
-<button id="add-carry-row" type="button"><span class="session-icon" aria-hidden="true" style="--session-icon:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABlUlEQVR4nO2YzUoDMRDHf2cVfQAvIlbPoidbK1j11CI+kYdS8AUEqz5Lvx6ievcotmKL4CkSGGHdXXe3H26yMD8YKDRh5p9MJpMFRVEURVEUJcgl0AOmgPHEpkAXaJDCjQfBmhRrJa28KYjV4wT0PAjMZLROnICJB4GZjPYRJ8AUzCK4DsioAIplEVwHZIou4A14kPuoBKwCK8AWcAXcAu8+CvgEmsA66dgx18CXLwJegINADBeyC8/S/1h7Au6B88C4fR8E2OA3xfceMMgwpw/s/rU9eafNofg9AcYzzB0BVdcCmoGVH88xfyQH3UkvZKvNhvgcJIw7AsoJ/9v3wS+6OQl4FH/2UCaNy5IZtaCARk4CbE1Hqo1ZUEA7vAutHATsiC9bKhcVYEtshLo8GP7rTKyJH9vTh3M+jXKWd0FehAVUMsw59knAMlJo6DD+pRziO4fxc7YEAac4pp8QXCUm51O/TOTNNvA6523+U46dU5XeZpbg7c54RSljK9PxaeXjqEl7MJSLdCK/2z4cWEVRFCJ8A121vQAHgYUPAAAAAElFTkSuQmCC')"></span><span>Add Row</span></button>
-<button id="delete-carry-row" type="button"><span class="session-icon" aria-hidden="true" style="--session-icon:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB2ElEQVR4nO2ZzStEURiHHzbYGMVCVmq2rCwIG8VukphZjmJhK3b27PwD8pGsbSWxVnRtxkpISiQWsiCiq6NDp9u5zFxnzrnqPPWuZu77vr+Z8/E754LH4/F4PB6P54saIAt0pTSyskctPcA5EKY8zoDuaPNNwE0KmgvLjGsgowoYTkFTYYWRUwVMKR8EpJdA6VP0/I0XYInAC3BM4AU4JvjvAg7/u4B2YDOtArLAEDAOjAF9QGPMdyeBYhoENAPzwEmMXXgBdoCCxoXWuBYwDTxU4H0OgM64ZDYF1AEbCQ3cozSeTgWs/NGFvgIDrgRMG7LSd0CbbQEtFY758JdYVpPnDCb+inegVamxYDj/m9wXPsnIY5rJAkeRfyBuqQz/EDNqAXFQPjWYXExWdZMKqxC7urFq6lpFnWSDmuK3QL7MXOLHXdTkELcoVihqis8lyHMRyfGEJfIaAWsJVrHHSI57LNEbM4b3gKUyYhW41DxfsiWgURoz05N4HYvsVEHAiE0BBcPNXwENNgUI/75vUMAEDujQrCRhgtgCanHEsLTESZsvRW+mXdAvd+KwwtiWrwJSgbAawhILV1nOhBUHeWfD5ieEJZ6Vxkx4m2e5wx7LdX4UqI97+gOtgHps2v8wNQAAAABJRU5ErkJggg==')"></span><span>Delete Row</span></button>
-<button id="carry-grid-toggle" type="button" aria-controls="work-grid" aria-expanded="false"><span class="session-icon" aria-hidden="true"></span><span id="carry-grid-label">Show Rows</span></button>
-</div>
-<h3 id="grid-color-title">Grid Color</h3>
-<div class="grid-settings-actions" role="group" aria-labelledby="grid-color-title">
-<button id="color-code-toggle" class="color-code-toggle" type="button" aria-pressed="true" aria-label="Color Code"><span class="session-icon" aria-hidden="true" style="--session-icon:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACQklEQVR4nO2aTUhUURTHf0YZZohJlFmIJtJCIVtJCSEIgknhSkRoFm0k3RRECzfiohatS9GIQFqVi0SJwEWBtQjKj4WIhgsRFAkSo/Ija+TCEYYhc+6dy3k38Q+H4TFv4Hfu1/uf8wb2ta89pQLgbApxmADVCcRTjDkgg4BUBWxaJDBGQMoGZizgTdQTkB5bwr8jIF21hDdRTSA6Dixawg8SkF5Ywv8GKghENxyWzjMCURGwYgm/AZQQgA4AbxxG/yGB6K4D/E/gNAGoDFh1SOAeAciYrwkH+GUgjwD0wAE+LkvuvzNqcYkF4EjU8EeBz46j30IAeuoIPwMcihr+nCN8HGiKEvyEfF50hB+VB56qzHTfBD4AP+Q6x/Hcr9OGrwSmkiCuyHePLOHfasNfkxFPBhmRotvMwrRFApc04S+IT9kJ5pbcdwqYTAF+QNsa7FaIm4dXLKH6er5LsVKumcCdFJeEAWtL+F0D8Okv9/Vpj/6S5eYcAgqTNn67gPcC+ZoJXHc837+JqSslYr1yTGA7/sgpdR9oBU5qwucC62kmkBzFmgnEPMNvapu2l54TmNT29i7e5l/Rq5lAk2d4E6q2ud8z/Hdpravo2A6mLZ3oQlG3PcObvXRGCz4LmPecgGq7pMMz/JBmyVgF/PIIPywzqqIK4ItH+B4gUwu+WfqSPsA/Ape1wGuA1x6g18R21Gq9kM4Qi5uOKTPd526gUYp5VR0ExgXGFOpfJcxbxFnpLLyXwvuJ9OzNs8HAno/yvwtbDtrGz86PNkwAAAAASUVORK5CYII=')"></span><span class="color-code-label">Color Code</span></button>
-</div>
-</div>
-</section>
-<section class="card session-card" aria-labelledby="session-title">
+<section class="card session-card" id="session-card" aria-labelledby="session-title">
 <div class="card-heading">
 <h2 id="session-title">Session</h2>
+<button type="button" class="term-toggle" id="session-toggle" aria-controls="session-details" aria-expanded="true" aria-label="Hide Session"><span class="term-eye" aria-hidden="true"></span></button>
 </div>
 <div id="session-details">
 <p class="session-time">Session time <time id="session-time" datetime="PT0S">00:00</time></p>
@@ -152,7 +168,7 @@
 </div>
 
 </div>
-<footer class="app-footer"><span class="footer-signature">Built by Ara with <a href="https://icons8.com/icon/59805/heart" aria-label="Love. Heart icon by Icons8"><span class="footer-heart" aria-hidden="true" style="--heart-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABi0lEQVR4nO2WT0sCQRTAx7oUQUF/iD5HQdH3EJR9g0hfIOgD2CHtPUxKOyV0ygo6dOoDRIciOhQh+mZBAutYnTOojTGiNHddXecQ+YN3WR7z2zfvDTNC9Pm3lAEXWeIBAz4oSTWWdK+A9sqx9dlfuZLmlMTCz1wG2rctXPAtdMJHgwyYU5KcVsFAbywx6QgnpIMlpVjie8vc+nfc0mu2FbOkrJu08Qcwx5K2/eQqoE1PqYL0vNvfBwm9pm6dV7WHvZZ+BxbcxZ/DYUTMgFWPrcZXcxVTzUv8ZEwM9OjRYzwzuNWn7hVLWjEmlrjsXnF0Y5IBX0z0144np1zFdTlQ3kC1O6IdJZma0IPQQ/Gz3knhBxsw3jsxxnxJv1CAu8EnmfKiU6rhzDBLughwfM7vYokh0Q2VMI4x4HUX4tviUmZcBKFkrc0wULETaSWSnA4kbZx0vPLR08vAlTZzA+kRBjx2P6t0YlvZUWECRzghJWm1+bGgXy1OIjEgTKMsiuq7u35/A0aMC/v8ST4AKOdJEEhR2SMAAAAASUVORK5CYII=')"></span></a></span><a class="icon-credit" href="https://icons8.com" target="_blank" rel="noopener noreferrer">Icons by Icons8</a></footer>
+<footer class="app-footer"><span class="footer-signature">Built by Ara with <a href="https://icons8.com/icon/59805/heart" aria-label="Love. Heart icon by Icons8"><span class="footer-heart" aria-hidden="true" style="--heart-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABi0lEQVR4nO2WT0sCQRTAx7oUQUF/iD5HQdH3EJR9g0hfIOgD2CHtPUxKOyV0ygo6dOoDRIciOhQh+mZBAutYnTOojTGiNHddXecQ+YN3WR7z2zfvDTNC9Pm3lAEXWeIBAz4oSTWWdK+A9sqx9dlfuZLmlMTCz1wG2rctXPAtdMJHgwyYU5KcVsFAbywx6QgnpIMlpVjie8vc+nfc0mu2FbOkrJu08Qcwx5K2/eQqoE1PqYL0vNvfBwm9pm6dV7WHvZZ+BxbcxZ/DYUTMgFWPrcZXcxVTzUv8ZEwM9OjRYzwzuNWn7hVLWjEmlrjsXnF0Y5IBX0z0144np1zFdTlQ3kC1O6IdJZma0IPQQ/Gz3knhBxsw3jsxxnxJv1CAu8EnmfKiU6rhzDBLughwfM7vYokh0Q2VMI4x4HUX4tviUmZcBKFkrc0wULETaSWSnA4kbZx0vPLR08vAlTZzA+kRBjx2P6t0YlvZUWECRzghJWm1+bGgXy1OIjEgTKMsiuq7u35/A0aMC/v8ST4AKOdJEEhR2SMAAAAASUVORK5CYII=')"></span></a><span>and AI</span></span><a class="icon-credit" href="https://icons8.com" target="_blank" rel="noopener noreferrer">Icons by Icons8</a></footer>
 </main>
 <dialog id="welcome-dialog" class="math-dialog" aria-labelledby="welcome-title">
 <div class="card-heading">

@@ -26,16 +26,22 @@ const termNames = {dividend:'Dividend',divisor:'Divisor',answer:'Quotient',lefto
 let hiddenTerms = {};
 let dataBoxHidden = false;
 let gridSettingsHidden = false;
+let sessionHidden = false;
+let hmsbHidden = false;
 let colorCode = true;
 let showCarryRows = false;
 let scratchHidden = true;
 let scratchZoom = 'normal';
+const gridSizes = {small:'3.65rem',medium:'4.5rem',large:'5.5rem'};
+let gridSize = gridSizes.small;
 const storageKey = 'mia-long-division-v1';
 try {
   const saved = JSON.parse(localStorage.getItem(storageKey));
   hiddenTerms = saved?.hiddenTerms || {};
   dataBoxHidden = saved?.dataBoxHidden === true;
   gridSettingsHidden = saved?.gridSettingsHidden === true;
+  sessionHidden = saved?.sessionHidden === true;
+  hmsbHidden = saved?.hmsbHidden === true;
   colorCode = saved?.colorCode !== false;
   showCarryRows = saved?.showCarryRows === true;
   scratchHidden = saved?.scratchHidden !== false;
@@ -57,12 +63,13 @@ try {
       delete state.rows[row.col].subtract;
     }
   }
-  for (const id of ['size','theme','highlight']) {
+  if (Object.values(gridSizes).includes(saved?.size)) gridSize = saved.size;
+  for (const id of ['theme','highlight']) {
     if (saved?.[id] && [...$(id).options].some(option=>option.value===saved[id])) $(id).value = saved[id];
   }
 } catch {}
 function save() {
-  try { localStorage.setItem(storageKey, JSON.stringify({state,hiddenTerms,dataBoxHidden,gridSettingsHidden,colorCode,showCarryRows,scratchHidden,scratchZoom,stepLockEnabled:requireStep,size:$('size').value,theme:$('theme').value,highlight:$('highlight').value})); return true; } catch { return false; }
+  try { localStorage.setItem(storageKey, JSON.stringify({state,hiddenTerms,dataBoxHidden,gridSettingsHidden,sessionHidden,hmsbHidden,colorCode,showCarryRows,scratchHidden,scratchZoom,stepLockEnabled:requireStep,size:gridSize,theme:$('theme').value,highlight:$('highlight').value})); return true; } catch { return false; }
 }
 function syncSetup() {
   $('dividend').value = state.dividend;
@@ -591,6 +598,7 @@ $('data-toggle').addEventListener('click',()=>{
   if (!dataBoxHidden) applyProblem();
   dataBoxHidden = !dataBoxHidden;
   updateDataBox();
+  placeCards($('data-toggle'));
   save();
 });
 updateDataBox();
@@ -602,9 +610,77 @@ function updateGridSettingsVisibility() {
 $('grid-settings-toggle').addEventListener('click',()=>{
   gridSettingsHidden = !gridSettingsHidden;
   updateGridSettingsVisibility();
+  placeCards($('grid-settings-toggle'));
   save();
 });
 updateGridSettingsVisibility();
+function updateSessionVisibility() {
+  $('session-details').hidden = sessionHidden;
+  $('session-toggle').setAttribute('aria-expanded',String(!sessionHidden));
+  $('session-toggle').setAttribute('aria-label',sessionHidden?'Show Session':'Hide Session');
+}
+$('session-toggle').addEventListener('click',()=>{
+  sessionHidden = !sessionHidden;
+  updateSessionVisibility();
+  placeCards($('session-toggle'));
+  save();
+});
+updateSessionVisibility();
+
+const compactCards = window.matchMedia('(max-width:55rem)');
+function updateHmsbVisibility() {
+  $('hmsb-details').hidden = hmsbHidden;
+  $('hmsb-toggle').setAttribute('aria-expanded',String(!hmsbHidden));
+  $('hmsb-toggle').setAttribute('aria-label',hmsbHidden?'Show HMSB Steps':'Hide HMSB Steps');
+}
+$('hmsb-toggle').addEventListener('click',()=>{
+  hmsbHidden = !hmsbHidden;
+  updateHmsbVisibility();
+  placeCards($('hmsb-toggle'));
+  save();
+});
+updateHmsbVisibility();
+
+function setMenuOpen(open) {
+  $('mobile-cards').hidden = !open;
+  $('mobile-menu-toggle').setAttribute('aria-expanded',String(open));
+}
+function placeCards(focusTarget = document.activeElement) {
+  const groups = {
+    'left-rail': [],
+    'reference-column': [],
+    'mobile-cards': []
+  };
+  const cards = [
+    ['grid-settings-card',gridSettingsHidden,'left-rail'],
+    ['data-card',dataBoxHidden,'left-rail'],
+    ['scratch-card',scratchHidden,'left-rail'],
+    ['hmsb-card',hmsbHidden,'reference-column'],
+    ['session-card',sessionHidden,'reference-column']
+  ];
+  for (const [id,hidden,rail] of cards) {
+    groups[compactCards.matches || hidden ? 'mobile-cards' : rail].push($(id));
+  }
+  const menu = $('mobile-menu-toggle');
+  const panel = $('mobile-cards');
+  menu.hidden = !groups['mobile-cards'].length;
+  if (menu.hidden) setMenuOpen(false);
+  for (const [id,children] of Object.entries(groups)) {
+    const container = $(id);
+    if (children.length!==container.children.length ||
+        children.some((card,index)=>card!==container.children[index])) {
+      container.append(...children);
+    }
+  }
+  if (panel.hidden && panel.contains(focusTarget)) menu.focus({preventScroll:true});
+  else if (focusTarget && document.activeElement!==focusTarget) focusTarget.focus({preventScroll:true});
+}
+$('mobile-menu-toggle').addEventListener('click',()=>setMenuOpen($('mobile-cards').hidden));
+compactCards.addEventListener('change',()=>{
+  placeCards();
+  syncScratchPanel();
+});
+placeCards();
 function updateTerm(id) {
   const visible = !hiddenTerms[id];
   $('term-'+id).dataset.hidden = String(!visible);
@@ -860,7 +936,10 @@ $('carry-grid-toggle').onclick = () => {
 };
 function applyDisplay() {
   const root = document.documentElement;
-  root.style.setProperty('--cell',$('size').value);
+  root.style.setProperty('--cell',gridSize);
+  for (const [name,value] of Object.entries(gridSizes)) {
+    $('grid-size-'+name).setAttribute('aria-pressed',String(value===gridSize));
+  }
   syncGridScrollSpace();
   root.dataset.theme = $('theme').value;
   root.dataset.highlight = $('highlight').value;
@@ -868,7 +947,10 @@ function applyDisplay() {
   $('color-code-toggle').setAttribute('aria-pressed',String(colorCode));
   updateCarryToggle();
 }
-for (const id of ['size','theme','highlight']) {
+for (const [name,value] of Object.entries(gridSizes)) {
+  $('grid-size-'+name).onclick = () => {gridSize = value; applyDisplay(); save();};
+}
+for (const id of ['theme','highlight']) {
   $(id).onchange=()=>{applyDisplay();save();};
 }
 const sessionKey = 'mathing-session-v1';
@@ -1303,7 +1385,7 @@ $('scratch-clear').onclick = () => {
 };
 function syncScratchPanel() {
   const card = $('scratch-card');
-  const floating = !scratchHidden && scratchZoom!=='normal';
+  const floating = !compactCards.matches && !scratchHidden && scratchZoom!=='normal';
   card.dataset.floating = String(floating);
   if (!floating) return;
   const bounds = $('workspace').getBoundingClientRect();
@@ -1331,6 +1413,7 @@ for (const size of scratchZoomLevels) {
 $('scratch-toggle').onclick = () => {
   scratchHidden = !scratchHidden;
   updateScratchVisibility();
+  placeCards($('scratch-toggle'));
   save();
 };
 function updateScratchVisibility() {
