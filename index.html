@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Long Division | Mathing</title>
-<link rel="stylesheet" href="./styles-83cccd6f75.css">
+<link rel="stylesheet" href="./styles-4ccd57ddc2.css">
 </head>
 <body>
 <main id="mathing-home" class="mathing-home" aria-labelledby="home-title" hidden>
@@ -14,9 +14,13 @@
 <main id="long-division">
 <header class="app-header">
 <h1 class="app-title"><span class="app-name">Mathing</span><span aria-hidden="true">&gt;</span><span>Long Division</span></h1>
+<button id="mobile-menu-toggle" type="button" hidden aria-controls="mobile-cards" aria-expanded="false"><span class="mobile-menu-icon" aria-hidden="true"></span>Menu</button>
+<div class="display-options">
+<label>Theme <select id="theme"><option value="dark">Dark</option><option value="light">Light</option></select></label>
+<label>Highlight <select id="highlight"><option value="yellow">Yellow</option><option value="green">Green</option><option value="pink">Pink</option><option value="blue">Blue</option></select></label>
+</div>
 <div class="header-toolbar">
 <div class="tools">
-<button id="mobile-menu-toggle" type="button" hidden aria-controls="mobile-cards" aria-expanded="false"><span class="mobile-menu-icon" aria-hidden="true"></span>Menu</button>
 <button id="undo" type="button" class="history-button" aria-label="Undo" title="Undo"><img alt="" width="26" height="26" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAADcElEQVR4nO2cT2teVRCHR2kVKm4ULC3WlQhK9xr6CZRiRbuVunIhLtSNCAZa0S+g+G8pxU9QSje2teu6TVPoW9yVQoI0vrnzm5m0mXLzRo2trb23zT1zT+aBs8hu8jDMmTP3nJcoSZIkSZIkSZIk+QdAj2/5M9kuyRDz0nHsCMlI0cNIRooeRjJS9DCSkaKHkYwUPYxkpOhhJCNFDyMZKXoYyUjRw0hGih5GMrZpMVQB/YPFJix6jkV/AOxDVT3o7o/RmIkiGf+79DqL/chsh0YnfTyS7Y7Mt0VA33P33RSdsUrGVuFivzci71BUapCMfwnXM8z8AkWiNsn4Szb0RiNylKJQq2jMZK+z2DxFoWbZmJWSb9z9cYoAi31auezvKAr1Z7Z9TlGoObMZui4iRygKdWe2LjPzAYpChKGSu++eTv25prFXG7GPNuYd0LVHkNmnKRIRx6Q33J8B9ARDpw8juxF5myIRdfA/nfpeiP3UO6vFrrr7LorEg2yQVAjA3meo9ZLNeoyiEfnjrMja4T61m2GXQo5Y75fZVJh2s+yX1TZHEYl8gQZiJ7vXav2eosL/kdkUgLYVZOif3WTr9ZDl416yKQiAftE1q0XkFYoMAl7bXVnxZztvjLAPKDq8mdkUCBY937FOf0tjAMGeVjRiH3cUfbZ0zKOE2ea6ibarpWMeJdPZ8bxL57FUOuZR4u5PdspoqJSOeZR4ih6GLB0DkZvhQLDYJ9neDQBEL1R5YIlEtUfwaAD6VY+h0sul4x4Vq6u+j6GrHTuOa6HHpBEB7OdRXxWrsdPA5moae6107KNBRN5k6M3O2QxbKB37aMDsukGv20vM+m7p+MPTNM3+PjV5y2lwEu4CTbQ+GdAvu3cXd9RmkbdK/y9hcPcn2gFRO7uYbXb6a59afHdt1lNUK+7+1IYs2G8MXXlYWf2XLjVN8zzViIi81F6/Kif370xeF1l7nWrE3Z9m2OXSkjc3wM+oVlhsPobkyid0LDYJIPnrMM/ftuvbHUNvlazJVZeLGKJ1WWTtDdopsNiVApl8qtoW7l60jyiHq8U2CfWOsEB7t7i9GWwL7YBox88uALzYynjENfhaO7QP+zSiFO6+Z+OdCfRi+1saD1hrdeOlq9gVFv2lFdt+SA1/cTxJkiRJkiRJkiRJkiRJkoSq5zZFeH/NW6LH1gAAAABJRU5ErkJggg=="></button>
 <button id="redo" type="button" class="history-button" aria-label="Redo" title="Redo"><img alt="" width="26" height="26" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAADZ0lEQVR4nO2bu4+MURTAL/FIiALxaFBQCTXBXyBLQaIVSvGsFDZZVDoS8WyE/0Eo2O1FJ3YlBB0SZHdn57wGR+7OTjwTc2fMfe35JV9/vt93cu49597POcMwDMMwDMMwDCMPEPlS6hjmBUiiJjuWaJMdUbTJjijaZEcUbbIjijbZEUWb7IiiTXZE0SY7omiTHVF0TbJVdQEzb0eUE0B8E4hHgeQVIn8GZA6SMqgH+bwrVS6A7AGS20j8IbnI2mSr6mJEPgIoL5KLq1U2MB9CkrfJZdUqGwA2AfHD5IJqlk1E+xH5U3IxNBDZeexG/FcH5G/JhVClWa2qC4H4WnIRVLFkDyBfSS6CBvcAyUgW5SK1CKw9k4laQzXXZMghk/0WzrfMqWVgzZns+R/7ZEBuAfFjIjnVbMqORkPX+k5yEPGWKbnd8fUjuOFfZlJ1ZayYi5M8O7voo60Gkjs+c2PHXZRkDyIf7TGLvwDJ2WRxl7Dw/TLq7GEKB8gtotbelLEXk8keP0/ubQWX46ljLyKTO7SH9uE12WVAEZncKRtI/D50d9Fo6DqXAUVksmf2jC88m0dcJuQa1x/4OhuYzRJzn/wvsi4XP+NPq8OymR+5jMg+kzsA8ViIaN9Wu4zIPpM7AMmbENF+duGMcJD4Y4jo6WldkzrmIgm9QaSqS1LHXCQmOhJWOiIBJK9tMYyAv/EZJJrkdIy4qqOHhmU0dcxF0kML3ppUXZU67uJg5m0homcf5Aup4y6OuTHpu8CsnpmZ0fWpYy8OILkVnNUkd1PHXRwAsrsH0UokJ1PHXhRzh7MTPR7ODqWOvyj8/yglXjcoDn+BJnRkir8+92yB7JIm0cE+RKvfjSDyxakpXZ36XbIHiB/0Ixt/XHIca5KcaTZlpz8xt6nfbwDAxpQ/BQHyJKI89R9JVZe7miGifTlcRAeU54i4xdUMkAynFo1t2ROqusLVDCJfzkI2ybCrmbnf365mIPqlmw/4jEpZswH5q6oudfMB32qHni+iie4NANgAyPetdESiSXQg9FC3T9Hn3HxFVRcB8GFAGR9s2ZDx6rd33QIgu4D4RuhJTReSnyHi5tTvlyVEtBVRjgHxdf9Tp6+vfhHt9kZUuwXnJ/7WqqouS/0+hmEYhmEYhmEYhmEYhmEYhvsb3wFtToPghPWXagAAAABJRU5ErkJggg=="></button>
 </div>
@@ -24,10 +28,6 @@
 <button id="check-math" type="button"><span class="session-icon" aria-hidden="true" style="--session-icon:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB1ElEQVR4nO2XvStGURzHP4iUKJNMlJKXZ1MmIYOkTCYlUrIYrBb+BxHZHgtSxEQZTFhlMRhIEgaE8hT16Na5dbrudd+ee+65dT51huc+v3P6fM/Lc+4DBoPBYHCnChgApoFeoIIM0QFcA0WpXQBNZIAc8CSkr4A14EZ8vgWayYj8IVAtntcBp7qHyHnI29RKIawVqSdD8nKIc1G3iiZ0BpS3aRW1d2RQ3qJB+mXKnHw5sK1DgKjyG5L883/Fo8AxcA+cAJOayReBfa/iBUeh3ZaAMk3k38VYf1gUBT/AHNAITAFf4vlyjBClkv8AevzkxxzfDcUMkbj8iCQ/7jHgoBRiPUSINuBB9DsKIZ93yH8C/V4d7Ct61mfgsCthzfxjkjNvUxCFNfgTNIQyeaTiYYLhF0KpvMW36PACdBEvhHJ5i0up4yvQTTCcB7tdxYF1Y94xQNSVKESY+Xycmbex/jDvliiEcnmbypgh+sRrSCry8kpsOQYOcyZQtefTCpG4fJIhlMknEUK5fClDpCYvh9iMGCJ1+TghtJGPEkI7+TAhtJX3u7EnRJC9JG5YFSvh1rSa+bAhtJaXt9OOi/ybjtvGC+vQzgAHwBmwArR4VhsMBgMSvyJFU+I1T/wkAAAAAElFTkSuQmCC')"></span><span>Check Math</span></button>
 <button id="save-work" type="button"><span class="session-icon" aria-hidden="true" style="--session-icon:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABY0lEQVR4nO3ZvUoDQRSG4RfsU6RRUBJIIVobGztvQRAsrL2J3EBA3N7WPleQzk6wiE2qgIo2FipaqKgwsjiBRXD/Zs7OiOeDr9kic56dQMgMaDSiWQF6DXfRx+CbwAwwAfoB7LkMvwBc5SyQwsZCndk1Pl0QqwVvaIBcBpl1aiM2IgEYi9iPCdACdjPdKgDU2glJwPqPzxqVAFTeiRgBpgoiVoApi4gZYIB3oP2XAQboKuC/Alo1fgeMb8AQuQybANwAHYHhO8BtE4C0r8AEOPfUCfBWcngvgNDtKgAFoADXHXgCHjz3uYmv0D3QRy7bwIsk4Aj5nEgCJP/Uz5MoAAU4JVEACnBKogAU4JREAXz3zB5/HAcEHNoZpnUA84Ong4CAHfvstCwge8V0Z++upgEBF3aGx8yzdtEl32WgS76x7XXO+ukxTGH6Aa9ZTU7T3VirspXLAS66e790qcrgGg3l8gXDsHbzCPzI3wAAAABJRU5ErkJggg==')"></span><span>Done and Save</span></button>
 </div>
-</div>
-<div class="display-options">
-<label>Theme <select id="theme"><option value="dark">Dark</option><option value="light">Light</option></select></label>
-<label>Highlight <select id="highlight"><option value="yellow">Yellow</option><option value="green">Green</option><option value="pink">Pink</option><option value="blue">Blue</option></select></label>
 </div>
 </header>
 <p id="status" class="sr" role="status"></p>
@@ -224,6 +224,6 @@
 <button id="check-download" type="button" hidden>Download PDF</button>
 </div>
 </dialog>
-<script src="./app-81e89fb824.js"></script>
+<script src="./app-94911b638e.js"></script>
 </body>
 </html>
